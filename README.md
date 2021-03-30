@@ -1,6 +1,6 @@
 # basic_project
 
-A new Flutter project.
+A basic functionality of Flutter.
 
 ## Getting Started
 
