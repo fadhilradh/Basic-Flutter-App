@@ -15,15 +15,7 @@ class MyFirstApp extends StatefulWidget {
 
 class _MyFirstAppState extends State<MyFirstApp> {
   var _questionIndex = 0;
-  void _answerQuestion() {
-    setState(() {
-      _questionIndex++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    const questions = [
+  final questions = const [
       {
         'questionText': 'Siapa Nabi yang sangat sabar ketika diuji dengan sakit dan kemiskinan?',
         'answers': ['Nabi Ayyub', 'Nabi Daud', 'Nabi Muhammad', 'Nabi Musa']
@@ -37,6 +29,16 @@ class _MyFirstAppState extends State<MyFirstApp> {
         'answers': ['Umar bin Abdul Aziz', 'Hasan al Bashri', 'Said ibnu Musayyib', 'Uwais al Qarni']
       },
     ];
+    
+  void _answerQuestion() {
+    setState(() {
+      _questionIndex++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -44,14 +46,14 @@ class _MyFirstAppState extends State<MyFirstApp> {
           centerTitle: true,
           backgroundColor: Color(0xff304ffe),
         ),
-        body: Column(
+        body: _questionIndex < questions.length ? Column(
           children: [
             Question(questions[_questionIndex]['questionText']),
             ...(questions[_questionIndex]['answers'] as List<String>).map((answer) {
               return Answer(_answerQuestion, answer);
             }).toList()
           ],
-        ),
+        ) : Center(child: Text('Kuis selesai') ,) ,
       ),
     );
   }
